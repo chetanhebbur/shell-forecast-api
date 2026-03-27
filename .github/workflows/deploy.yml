@@ -20,10 +20,13 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
+          pip install pytest httpx
 
       - name: Run tests
-        run: PYTHONPATH=. pytest tests/test_api.py -v
+        run: |
+          PYTHONPATH=. pytest tests/ -v --tb=short
 
   deploy:
     name: Deploy to Azure
